@@ -1,0 +1,9 @@
+---
+
+- apt:
+    name=git
+    state=latest
+
+- user:
+    name=observatory
+    state=present

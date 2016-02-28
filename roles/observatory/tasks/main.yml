@@ -1,0 +1,39 @@
+---
+
+- apt:
+    name={{ item }}
+    state=present
+  with_items:
+    - nodejs-legacy
+    - nodejs
+    - npm
+
+- synchronize:
+    set_remote_user=true
+    mode=push
+    src=/tmp/dist/
+    dest="{{ server_dir }}"
+    recursive=yes
+    
+- name: npm install packages
+  npm: 
+      global=yes
+      name=forever
+      state=present
+
+- npm: 
+      path="{{ server_dir }}"
+      state=present
+
+
+- name: set environment variables
+  lineinfile:
+      dest=/etc/profile
+      line="NODE_ENV=production"
+
+- name: set environment variables
+  lineinfile:
+      dest=/etc/profile
+      line="PORT={{ app_port }}"
+
+- shell: "NODE_ENV=production forever -a -l {{ log_file }} start {{ server_dir }}/server/app.js"

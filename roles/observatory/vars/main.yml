@@ -1,0 +1,4 @@
+---
+
+server_dir: "/opt/observatory"
+log_file: "/opt/observatory.log"

@@ -1,0 +1,14 @@
+---
+
+- hosts: webservers
+  vars:
+    http_port: 80
+    app_port: 8080
+  roles:
+    - common
+    - observatory
+    - nginx
+  tasks:
+      - name: say hi
+        debug: msg="Finished web server tasks"
+

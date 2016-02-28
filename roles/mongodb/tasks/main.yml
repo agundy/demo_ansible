@@ -1,0 +1,12 @@
+---
+
+- apt:
+    name=mongodb
+    state=latest
+    update_cache=yes
+
+- cron:
+    name="backup mongodb"
+    minute="0"
+    hour="5,19"
+    job="mongodump"

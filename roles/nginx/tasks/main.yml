@@ -1,0 +1,16 @@
+---
+
+- apt: 
+    name=nginx
+    state=latest
+
+- file:
+    path=/etc/nginx/sites-enabled/default
+    state=absent
+
+- template:
+    src=nginx.conf
+    dest=/etc/nginx/sites-enabled/nginx.conf
+  changed_when: true
+  notify: 
+    - nginx_restart

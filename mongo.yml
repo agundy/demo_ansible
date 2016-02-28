@@ -1,0 +1,12 @@
+---
+
+- hosts: databases
+  vars:
+    http_port: 80
+  roles:
+    - common
+    - mongodb
+  tasks:
+      - name: say hi
+        debug: msg="Running mongodb tasks"
+
